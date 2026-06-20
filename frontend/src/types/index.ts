@@ -8,11 +8,14 @@ export interface GetSongsParams {
     likes: number;
 }
 
-export interface Song {
+export type ViewMode = "table" | "gallery";
+
+/*export interface Song {
     index: number;
     title: string;
     artist: string;
     album: string;
     genre: string;
     likes: number;
-}
+}*/
+export interface Song { id: string; index: number; title: string; artist: string; album: string; genre: string; coverUrl: string; likes: number; review: string; previewUrl: string; lyrics: string[]; }

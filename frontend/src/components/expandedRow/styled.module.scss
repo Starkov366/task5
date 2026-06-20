@@ -1,0 +1,102 @@
+.expandedRow {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 18px;
+    padding: 16px 14px 18px 44px;
+    background: #fff;
+    border-top: 1px solid #ececec;
+  }
+  
+  .coverSide {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .cover {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 1px solid #e7e7e7;
+  }
+  
+  .likeBtn {
+    border: 0;
+    background: #3c7bf7;
+    color: #fff;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+  
+  .content {
+    padding-right: 16px;
+  }
+  
+  .playerRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  .playBtn {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    border: 0;
+    background: #3c7bf7;
+    color: #fff;
+  }
+  
+  .progress {
+    flex: 1;
+    height: 6px;
+    border-radius: 999px;
+    background: #e4e4e4;
+  }
+  
+  .duration {
+    font-size: 12px;
+    color: #666;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+  
+  .meta,
+  .meta2 {
+    margin-top: 10px;
+    color: #666;
+  }
+  
+  .reviewTabs {
+    margin-top: 14px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tabActive {
+    border: 1px solid #ddd;
+    border-bottom: 1px solid #fff;
+    background: #fff;
+    border-radius: 6px 6px 0 0;
+    padding: 7px 14px;
+    transform: translateY(1px);
+  }
+  
+  .lyricsBox {
+    max-height: 180px;
+    overflow: auto;
+    padding: 10px 10px 8px 0;
+    line-height: 1.8;
+  }
+  
+  .highlight {
+    font-weight: 700;
+  }

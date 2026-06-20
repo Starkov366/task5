@@ -21,8 +21,10 @@ export function makeReview(faker: any, rng: () => number) {
     return faker.lorem.paragraph();
 }
 
-export function makePreviewUrl(rng: () => number) {
-    return rng() > 0.5
-        ? "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-        : "";
+
+export function makePreviewUrl(seed: string, page: number, i: number, rng: () => number) {
+  
+    const trackId = Math.floor(rng() * 5) + 1;
+
+    return `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${trackId}.mp3`;
 }

@@ -48,7 +48,7 @@ export function generateSongs({
 
             review: makeReview(faker, rng),
 
-            previewUrl: makePreviewUrl(rng),
+            previewUrl: makePreviewUrl(seed, page, i, rng),
 
             lyrics: makeLyrics(faker, rng),
         };
