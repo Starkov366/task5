@@ -34,7 +34,7 @@ export function generateSongs({
         return {
             id,
 
-            index: page * limit + i + 1,
+            index: (page - 1) * limit + i + 1,
 
             title: faker.music.songName(),
             artist: faker.person.fullName(),
