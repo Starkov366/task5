@@ -7,10 +7,12 @@ export function generateLikes(avg: number, rng: () => number) {
 
     return likes;
 }
-export function makeCover(seed: string, page: number, i: number) {
-    return `https://picsum.photos/seed/${seed}-${page}-${i}/400/400`;
-}
-
+export function makeCover(seed: string, page: number, i: number, rng: () => number) {
+    return {
+      seed: Math.floor(rng() * 1e9),
+      hue: Math.floor(rng() * 360),
+    };
+  }
 export function makeLyrics(faker: any, rng: () => number) {
     if (rng() < 0.4) return [];
     return faker.lorem.lines(5).split("\n").filter(Boolean);

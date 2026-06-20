@@ -44,7 +44,7 @@ export function generateSongs({
 
             likes: generateLikes(likesAvg, rng),
 
-            coverUrl: makeCover(seed, page, i),
+            coverUrl: makeCover(seed, page, i,rng),
 
             review: makeReview(faker, rng),
 
