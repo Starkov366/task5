@@ -7,3 +7,22 @@ export function generateLikes(avg: number, rng: () => number) {
 
     return likes;
 }
+export function makeCover(seed: string, page: number, i: number) {
+    return `https://picsum.photos/seed/${seed}-${page}-${i}/400/400`;
+}
+
+export function makeLyrics(faker: any, rng: () => number) {
+    if (rng() < 0.4) return [];
+    return faker.lorem.lines(5).split("\n").filter(Boolean);
+}
+
+export function makeReview(faker: any, rng: () => number) {
+    if (rng() < 0.3) return "";
+    return faker.lorem.paragraph();
+}
+
+export function makePreviewUrl(rng: () => number) {
+    return rng() > 0.5
+        ? "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        : "";
+}
