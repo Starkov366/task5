@@ -18,4 +18,21 @@ export type ViewMode = "table" | "gallery";
     genre: string;
     likes: number;
 }*/
-export interface Song { id: string; index: number; title: string; artist: string; album: string; genre: string; coverUrl: string; likes: number; review: string; previewUrl: string; lyrics: string[]; }
+export interface Song {
+    id: string;
+    index: number;
+    title: string;
+    artist: string;
+    album: string;
+    genre: string;
+    coverUrl: string;
+    likes: number;
+    review: string;
+    lyrics: string[];
+  
+    preview: {
+      bpm: number;
+      root: number;
+      pattern: number[];
+    };
+  }

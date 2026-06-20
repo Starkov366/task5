@@ -2,7 +2,7 @@ import seedrandom from "seedrandom";
 import { faker as fakerEN } from "@faker-js/faker/locale/en";
 import { faker as fakerDE } from "@faker-js/faker/locale/de";
 import { faker as fakerUK } from "@faker-js/faker/locale/uk";
-import { generateLikes, makeCover, makeLyrics, makePreviewUrl, makeReview } from "../../utils/likes";
+import { generateLikes, makeCover, makeLyrics, makePreview, makeReview } from "../../utils/likes";
 import { GenerateSongsParams } from "./types";
 
 const fakers = {
@@ -48,7 +48,7 @@ export function generateSongs({
 
             review: makeReview(faker, rng),
 
-            previewUrl: makePreviewUrl(seed, page, i, rng),
+            previewUrl: makePreview(seed, page, i, rng),
 
             lyrics: makeLyrics(faker, rng),
         };

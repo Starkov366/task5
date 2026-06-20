@@ -22,9 +22,10 @@ export function makeReview(faker: any, rng: () => number) {
 }
 
 
-export function makePreviewUrl(seed: string, page: number, i: number, rng: () => number) {
-  
-    const trackId = Math.floor(rng() * 5) + 1;
-
-    return `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${trackId}.mp3`;
-}
+export function makePreview(seed: string, page: number, i: number, rng: () => number) {
+    return {
+      bpm: 80 + Math.floor(rng() * 100),
+      root: Math.floor(rng() * 12),
+      pattern: Array.from({ length: 16 }, () => Math.floor(rng() * 8)),
+    };
+  }

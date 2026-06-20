@@ -7,35 +7,67 @@ interface ExpandedRowProps {
 }
 
 export function ExpandedRow({ song }: ExpandedRowProps) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const ctxRef = useRef<AudioContext | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
-  const togglePlay = () => {
-    if (!song.previewUrl) return;
+  const playSong = () => {
+    if (!song.preview) return;
 
-
-    if (!audioRef.current) {
-      audioRef.current = new Audio(song.previewUrl);
-
-      audioRef.current.addEventListener("ended", () => {
-        setIsPlaying(false);
-      });
+    if (!ctxRef.current) {
+      ctxRef.current = new AudioContext();
     }
 
-    const audio = audioRef.current;
+    const ctx = ctxRef.current;
+    const now = ctx.currentTime;
 
-    
-    if (audio.src !== song.previewUrl) {
-      audio.src = song.previewUrl;
+    const bpm = song.preview.bpm;
+    const step = 60 / bpm;
+
+    const scale = [
+      261.6, 293.6, 329.6, 349.2, 392, 440, 493.9
+    ];
+
+ 
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
     }
 
-    if (isPlaying) {
-      audio.pause();
+    setIsPlaying(true);
+
+    song.preview.pattern.forEach((n, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "sine";
+
+      const freq = scale[(n + song.preview.root) % scale.length];
+      osc.frequency.value = freq;
+
+      gain.gain.value = 0.05;
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      const start = now + i * step;
+      const stop = start + 0.2;
+
+      osc.start(start);
+      osc.stop(stop);
+    });
+
+    timeoutRef.current = window.setTimeout(() => {
       setIsPlaying(false);
-    } else {
-      audio.play();
-      setIsPlaying(true);
+    }, step * song.preview.pattern.length * 1000);
+  };
+
+  const stopSong = () => {
+    if (ctxRef.current) {
+      ctxRef.current.close();
+      ctxRef.current = null;
     }
+
+    setIsPlaying(false);
   };
 
   return (
@@ -52,16 +84,20 @@ export function ExpandedRow({ song }: ExpandedRowProps) {
         <div className={styles.playerRow}>
           <h3 className={styles.title}>{song.title}</h3>
 
-       
           <button
             className={styles.playBtn}
             type="button"
-            onClick={togglePlay}
+            onClick={() => {
+              if (isPlaying) stopSong();
+              else playSong();
+            }}
           >
             {isPlaying ? "⏸" : "▶"}
           </button>
 
-          <span className={styles.duration}>2:12</span>
+          <span className={styles.duration}>
+            {Math.round((60 / song.preview.bpm) * song.preview.pattern.length)}s
+          </span>
         </div>
 
         <div className={styles.meta}>
