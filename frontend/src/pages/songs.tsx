@@ -6,6 +6,7 @@ import { SongsTable } from "../components/table";
 import { Gallery } from "../components/gallery";
 import type { Song } from "../types/index"
 import type{ ViewMode } from "../types";
+import { generateCover } from "../utils";
 
 
 
@@ -28,11 +29,11 @@ export default function SongsPage() {
 
     useEffect(() => {
         let cancelled = false;
-
+    
         async function loadSongs() {
             try {
                 setLoading(true);
-
+    
                 const data = await getSongs({
                     seed,
                     page: viewMode === "table" ? page : galleryPage,
@@ -40,14 +41,25 @@ export default function SongsPage() {
                     region,
                     likes,
                 });
-
+    
                 if (cancelled) return;
-
+    
+                const dataWithCovers = data.map((song) => ({
+                    ...song,
+                    coverUrl: generateCover(
+                        song.title,
+                        song.artist,
+                        Number(seed) + song.index
+                    ),
+                }));
+    
                 if (viewMode === "table") {
-                    setSongs(data);
+                    setSongs(dataWithCovers);
                 } else {
                     setSongs((prev) =>
-                        galleryPage === 1 ? data : [...prev, ...data]
+                        galleryPage === 1
+                            ? dataWithCovers
+                            : [...prev, ...dataWithCovers]
                     );
                 }
             } catch (error) {
@@ -58,9 +70,9 @@ export default function SongsPage() {
                 }
             }
         }
-
+    
         loadSongs();
-
+    
         return () => {
             cancelled = true;
         };
