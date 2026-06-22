@@ -1,6 +1,9 @@
 import { useRef, useState } from "react";
 import styles from "./styled.module.scss";
 import type { Song } from "../../types/index";
+import { AiFillLike } from "react-icons/ai";
+import { FaCirclePause } from "react-icons/fa6";
+import { FaPlayCircle } from "react-icons/fa";
 
 interface ExpandedRowProps {
   song: Song;
@@ -76,7 +79,7 @@ export function ExpandedRow({ song }: ExpandedRowProps) {
         <img className={styles.cover} src={song.coverUrl} alt={song.title} />
 
         <button className={styles.likeBtn} type="button">
-          👍 {song.likes}
+          <AiFillLike/> {song.likes}
         </button>
       </div>
 
@@ -92,7 +95,7 @@ export function ExpandedRow({ song }: ExpandedRowProps) {
               else playSong();
             }}
           >
-            {isPlaying ? "⏸" : "▶"}
+            {isPlaying ? <FaCirclePause/> : <FaPlayCircle/>}
           </button>
 
           <span className={styles.duration}>

@@ -1,5 +1,7 @@
 import styles from "./styled.module.scss";
 import type { ViewMode, Region } from "../../types/index";
+import { IoReload } from "react-icons/io5";
+import { IoGridOutline } from "react-icons/io5";
 
 interface ToolbarProps {
   region: Region;
@@ -47,7 +49,7 @@ export function Toolbar({
             inputMode="numeric"
           />
           <button className={styles.iconBtn} onClick={onRandomSeed} type="button" title="Random seed">
-            ↻
+            <IoReload/>
           </button>
         </div>
       </label>
@@ -72,7 +74,7 @@ export function Toolbar({
           className={`${styles.viewBtn} ${viewMode === "table" ? styles.active : ""}`}
           onClick={() => onViewModeChange("table")}
         >
-          ⌗
+          <IoGridOutline/>
         </button>
         <button
           type="button"

@@ -1,6 +1,8 @@
 import styles from "./styled.module.scss";
 import { SongRow } from "../../components/songRow";
 import type { Song } from "../../types/index"
+import { FaAngleLeft } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
 
 interface SongsTableProps {
   songs: Song[];
@@ -45,7 +47,7 @@ export function SongsTable({
 
       <div className={styles.pagination}>
         <button className={styles.pageBtn} onClick={() => onPageChange(Math.max(1, page - 1))}>
-          «
+          <FaAngleLeft/>
         </button>
         {pages.map((p) => (
           <button
@@ -57,7 +59,7 @@ export function SongsTable({
           </button>
         ))}
         <button className={styles.pageBtn} onClick={() => onPageChange(page + 1)}>
-          »
+          <FaAngleRight/>
         </button>
       </div>
 

@@ -1,6 +1,8 @@
 import styles from "./styled.module.scss";
 import { ExpandedRow } from "../../components/expandedRow";
 import type { Song } from "../../types/index"
+import { FaAngleUp } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
 
 interface SongRowProps {
   song: Song;
@@ -13,7 +15,7 @@ export function SongRow({ song, expanded, onToggle }: SongRowProps) {
     <div className={`${styles.rowWrap} ${expanded ? styles.expanded : ""}`}>
       <div className={styles.row} onClick={onToggle}>
         <button className={styles.chevron} type="button">
-          {expanded ? "⌃" : "⌄"}
+          {expanded ? <FaAngleUp/> : <FaAngleDown/>}
         </button>
         <div className={styles.index}>{song.index}</div>
         <div className={styles.cell}>{song.title}</div>
