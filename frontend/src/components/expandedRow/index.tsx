@@ -76,12 +76,19 @@ export function ExpandedRow({ song }: ExpandedRowProps) {
   return (
     <div className={styles.expandedRow}>
       <div className={styles.coverSide}>
-        <img className={styles.cover} src={song.coverUrl} alt={song.title} />
+  <div className={styles.coverWrapper}>
+    <img className={styles.cover} src={song.coverUrl} alt={song.title} />
 
-        <button className={styles.likeBtn} type="button">
-          <AiFillLike/> {song.likes}
-        </button>
-      </div>
+    <div className={styles.coverOverlay}>
+      <div className={styles.coverTitle}>{song.title}</div>
+      <div className={styles.coverArtist}>{song.artist}</div>
+    </div>
+  </div>
+
+  <button className={styles.likeBtn} type="button">
+    <AiFillLike /> {song.likes}
+  </button>
+</div>
 
       <div className={styles.content}>
         <div className={styles.playerRow}>
